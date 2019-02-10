@@ -1,2 +1,2 @@
 # MisNotas
-Aplicación de notas para probar utilidades de Firebase
+Aplicación de notas para probar utilidades de Firebase en iOS
