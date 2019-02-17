@@ -14,4 +14,15 @@ struct Constants {
 	}
 	
 	static let permissionsFacebook = ["public_profile", "email", "user_gender"];
+	
+	struct NoteFields {
+		static let name = "name"
+		static let text = "text"
+		static let photoURL = "photoUrl"
+		static let imageURL = "imageUrl"
+	}
+	
+	struct ChildsDatabase {
+		static let notes = "notes";
+	}
 }

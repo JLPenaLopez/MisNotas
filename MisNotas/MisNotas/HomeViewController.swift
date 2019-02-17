@@ -7,9 +7,11 @@
 //
 
 import UIKit
+
 import Firebase
 import GoogleSignIn
 import FBSDKLoginKit
+import FirebaseDatabase
 
 class HomeViewController: UIViewController, UITextFieldDelegate, UITableViewDelegate, UITableViewDataSource {
 	
@@ -23,10 +25,17 @@ class HomeViewController: UIViewController, UITextFieldDelegate, UITableViewDele
 	@IBOutlet weak var viewSendNote: UIView!
 	
 	
-	
+	//Variables de usuario logueado
 	var sbNameUser:String = "";
 	var sbEmailUser:String = "";
-
+	var sbPhotoUser:String = "AppIcon";
+	
+	//Variables de Database Firebase
+	var refDatabase:DatabaseReference!;
+	var notes: [DataSnapshot]! = [];
+	fileprivate var _refDatabaseHandle: DatabaseHandle!;
+	
+	
     override func viewDidLoad() {
         super.viewDidLoad()
 		self.txtNote.delegate = self;
@@ -38,12 +47,29 @@ class HomeViewController: UIViewController, UITextFieldDelegate, UITableViewDele
 		NotificationCenter.default.addObserver(self, selector: #selector(keyborardWillChange(notification:)), name: UIResponder.keyboardWillShowNotification, object: nil);
 		NotificationCenter.default.addObserver(self, selector: #selector(keyborardWillChange(notification:)), name: UIResponder.keyboardWillHideNotification, object: nil);
 		NotificationCenter.default.addObserver(self, selector: #selector(keyborardWillChange(notification:)), name: UIResponder.keyboardWillChangeFrameNotification, object: nil);
+		
+		self.tblViewNotes.delegate = self;
+		self.tblViewNotes.dataSource = self;
+		//Configuracion de la base de datos
+		self.configureDatabase();
     }
 	
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated);
+		self.imgPhotoUser.image = UIImage(named: self.sbPhotoUser);
 		self.lblNameUser.text = self.sbNameUser;
 		self.lblEmailUser.text = self.sbEmailUser;
+	}
+	
+	func configureDatabase(){
+		self.refDatabase = Database.database().reference();
+		self._refDatabaseHandle = self.refDatabase.child(Constants.ChildsDatabase.notes).observe(.value, with: { (snapshot) in
+			self.notes = [DataSnapshot]();
+			for child in snapshot.children {
+				self.notes.append(child as! DataSnapshot);
+			}
+			self.tblViewNotes.reloadData();
+		});
 	}
 	
 	deinit {
@@ -51,6 +77,13 @@ class HomeViewController: UIViewController, UITextFieldDelegate, UITableViewDele
 		NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil);
 		NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil);
 		NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillChangeFrameNotification, object: nil);
+		//Se remueve el observador de evento de la base de datos realtime
+		if let refHandle = self._refDatabaseHandle {
+			//Remueve todos los observadorores de la base de datos
+			//self.refDatabase.removeAllObservers();
+			//Remueve el obervador especifico del nodo notes de la base de datos
+			self.refDatabase.child(Constants.ChildsDatabase.notes).removeObserver(withHandle: refHandle);
+		}
 	}
 	
 	@objc func dismissKeyborad(){
@@ -82,15 +115,42 @@ class HomeViewController: UIViewController, UITextFieldDelegate, UITableViewDele
 		}
 	}
 	
+	
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		<#code#>
+		return self.notes.count;
 	}
 	
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-		<#code#>
+		let cell = self.tblViewNotes.dequeueReusableCell(withIdentifier: "NoteTableViewCell", for: indexPath) as! NoteTableViewCell;
+		
+		let noteSnapshot: DataSnapshot! = self.notes[indexPath.row];
+		guard let message = noteSnapshot.value as? [String:String] else { return cell; }
+		
+		let name = message[Constants.NoteFields.name] ?? "";
+		let text = message[Constants.NoteFields.text] ?? "";
+		
+		cell.setData(dataImg: nil, textCell: ( name + ": " + text ));
+		
+		return cell;
+	}
+	
+	func sendNote(data: [String: String]) {
+		var mdata = data
+		mdata[Constants.NoteFields.name] = Auth.auth().currentUser?.displayName
+		if let photoURL = Auth.auth().currentUser?.photoURL {
+			mdata[Constants.NoteFields.photoURL] = photoURL.absoluteString
+		}
+		//Se envian datos a la base de datos de Firebase
+		self.refDatabase.child(Constants.ChildsDatabase.notes).childByAutoId().setValue(mdata);
 	}
 	
 	@IBAction func onBtnSendNote(_ sender: Any) {
+		if let text = self.txtNote.text, !text.isEmpty{
+			let data = [Constants.NoteFields.text: text]
+			self.sendNote(data: data);
+			self.txtNote.text = "";
+			self.dismissKeyborad();
+		}
 	}
 	
 	@IBAction func onBtnCamera(_ sender: Any) {
