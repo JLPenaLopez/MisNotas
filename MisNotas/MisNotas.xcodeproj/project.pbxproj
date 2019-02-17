@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		3338C8B72210F85A00AE9DCA /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3338C8B62210F85A00AE9DCA /* GoogleService-Info.plist */; };
+		334656922219F5B600FE569F /* NoteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 334656912219F5B600FE569F /* NoteTableViewCell.swift */; };
 		3349A46A2211088800ADE3E6 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3349A4692211088800ADE3E6 /* Constants.swift */; };
 		335ABD6E22110C080088D333 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 335ABD6D22110C080088D333 /* HomeViewController.swift */; };
 		336912132210EF02004C00DE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336912122210EF02004C00DE /* AppDelegate.swift */; };
@@ -20,6 +21,7 @@
 
 /* Begin PBXFileReference section */
 		3338C8B62210F85A00AE9DCA /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		334656912219F5B600FE569F /* NoteTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteTableViewCell.swift; sourceTree = "<group>"; };
 		3349A4692211088800ADE3E6 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		335ABD6D22110C080088D333 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		3369120F2210EF02004C00DE /* MisNotas.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MisNotas.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -85,6 +87,7 @@
 				3369121E2210EF03004C00DE /* Info.plist */,
 				3349A4692211088800ADE3E6 /* Constants.swift */,
 				335ABD6D22110C080088D333 /* HomeViewController.swift */,
+				334656912219F5B600FE569F /* NoteTableViewCell.swift */,
 			);
 			path = MisNotas;
 			sourceTree = "<group>";
@@ -244,6 +247,7 @@
 				336912152210EF02004C00DE /* SignInViewController.swift in Sources */,
 				336912132210EF02004C00DE /* AppDelegate.swift in Sources */,
 				3349A46A2211088800ADE3E6 /* Constants.swift in Sources */,
+				334656922219F5B600FE569F /* NoteTableViewCell.swift in Sources */,
 				335ABD6E22110C080088D333 /* HomeViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -11,12 +11,17 @@ import Firebase
 import GoogleSignIn
 import FBSDKLoginKit
 
-class HomeViewController: UIViewController, UITextFieldDelegate {
+class HomeViewController: UIViewController, UITextFieldDelegate, UITableViewDelegate, UITableViewDataSource {
 	
 	@IBOutlet weak var imgPhotoUser: UIImageView!
 	@IBOutlet weak var lblNameUser: UILabel!
 	@IBOutlet weak var lblEmailUser: UILabel!
 	@IBOutlet weak var txtNote: UITextField!
+	@IBOutlet weak var viewOptions: UIView!
+	@IBOutlet weak var viewAds: UIView!
+	@IBOutlet weak var tblViewNotes: UITableView!
+	@IBOutlet weak var viewSendNote: UIView!
+	
 	
 	
 	var sbNameUser:String = "";
@@ -76,7 +81,30 @@ class HomeViewController: UIViewController, UITextFieldDelegate {
 			print("keyboardWillChangeFrameNotification  >> \(notification.name) ");
 		}
 	}
-    
+	
+	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+		<#code#>
+	}
+	
+	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+		<#code#>
+	}
+	
+	@IBAction func onBtnSendNote(_ sender: Any) {
+	}
+	
+	@IBAction func onBtnCamera(_ sender: Any) {
+	}
+	
+	@IBAction func onBtnCrash(_ sender: Any) {
+	}
+	
+	@IBAction func onBtnRefresh(_ sender: Any) {
+	}
+	
+	@IBAction func onBtnShare(_ sender: Any) {
+	}
+	
 	@IBAction func onBtnLogOut(_ sender: Any) {
 		let firebaseAuth = Auth.auth()
 		do {

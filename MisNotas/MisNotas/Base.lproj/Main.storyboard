@@ -171,6 +171,9 @@
                                                             <constraint firstAttribute="width" constant="30" id="or5-PD-WP4"/>
                                                         </constraints>
                                                         <state key="normal" title="Crash" image="ic_bug"/>
+                                                        <connections>
+                                                            <action selector="onBtnCrash:" destination="bkF-oW-pSl" eventType="touchUpInside" id="nsr-RA-yFR"/>
+                                                        </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SB2-6c-gVM">
                                                         <rect key="frame" x="45" y="0.0" width="30" height="30"/>
@@ -179,6 +182,9 @@
                                                             <constraint firstAttribute="width" constant="30" id="mrb-7G-ftF"/>
                                                         </constraints>
                                                         <state key="normal" title="Refresh" image="ic_refresh"/>
+                                                        <connections>
+                                                            <action selector="onBtnRefresh:" destination="bkF-oW-pSl" eventType="touchUpInside" id="U3h-Sd-GSA"/>
+                                                        </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4gW-qb-aw2">
                                                         <rect key="frame" x="90" y="0.0" width="30" height="30"/>
@@ -187,6 +193,9 @@
                                                             <constraint firstAttribute="width" constant="30" id="yPi-E3-Qr5"/>
                                                         </constraints>
                                                         <state key="normal" title="Invite" image="ic_share"/>
+                                                        <connections>
+                                                            <action selector="onBtnShare:" destination="bkF-oW-pSl" eventType="touchUpInside" id="qYv-zM-let"/>
+                                                        </connections>
                                                     </button>
                                                 </subviews>
                                             </stackView>
@@ -208,11 +217,50 @@
                                             <constraint firstItem="S6A-Qt-czk" firstAttribute="centerY" secondItem="VYt-pb-xXl" secondAttribute="centerY" id="yKD-Pm-39S"/>
                                         </constraints>
                                     </view>
-                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="bsn-ra-Ptr">
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="bsn-ra-Ptr">
                                         <rect key="frame" x="0.0" y="53" width="375" height="471"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="separatorColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <prototypes>
+                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="73" id="66e-Rn-WbK" customClass="NoteTableViewCell" customModule="MisNotas" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="28" width="375" height="73"/>
+                                                <autoresizingMask key="autoresizingMask"/>
+                                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="66e-Rn-WbK" id="vFq-Kc-p6g">
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="73"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <subviews>
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="3Z2-IS-HC3">
+                                                            <rect key="frame" x="8" y="8" width="50" height="50"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="50" id="8U8-ih-0FF"/>
+                                                                <constraint firstAttribute="width" constant="50" id="mWe-O0-R7D"/>
+                                                            </constraints>
+                                                        </imageView>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r8f-9O-KMK">
+                                                            <rect key="frame" x="66" y="23" width="286" height="20.5"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                    <constraints>
+                                                        <constraint firstItem="r8f-9O-KMK" firstAttribute="leading" secondItem="3Z2-IS-HC3" secondAttribute="trailing" constant="8" id="6cn-XV-W9v"/>
+                                                        <constraint firstAttribute="bottom" secondItem="3Z2-IS-HC3" secondAttribute="bottom" constant="8" id="LT0-A3-1Il"/>
+                                                        <constraint firstItem="r8f-9O-KMK" firstAttribute="centerY" secondItem="3Z2-IS-HC3" secondAttribute="centerY" id="M9F-pL-her"/>
+                                                        <constraint firstItem="3Z2-IS-HC3" firstAttribute="top" secondItem="vFq-Kc-p6g" secondAttribute="top" constant="8" id="dIc-er-z1s"/>
+                                                        <constraint firstItem="3Z2-IS-HC3" firstAttribute="leading" secondItem="vFq-Kc-p6g" secondAttribute="leading" constant="8" id="jon-Su-Cnb"/>
+                                                        <constraint firstAttribute="trailingMargin" secondItem="r8f-9O-KMK" secondAttribute="trailing" constant="8" id="msM-8w-7Qj"/>
+                                                    </constraints>
+                                                </tableViewCellContentView>
+                                                <inset key="separatorInset" minX="8" minY="0.0" maxX="8" maxY="0.0"/>
+                                                <connections>
+                                                    <outlet property="imgCell" destination="3Z2-IS-HC3" id="JSE-vd-l04"/>
+                                                    <outlet property="lblCell" destination="r8f-9O-KMK" id="IUq-Pp-enD"/>
+                                                </connections>
+                                            </tableViewCell>
+                                        </prototypes>
                                     </tableView>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4BD-i2-geF" userLabel="ViewNote">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4BD-i2-geF" userLabel="ViewSendNote">
                                         <rect key="frame" x="0.0" y="527" width="375" height="58"/>
                                         <subviews>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Qb2-vc-L5e">
@@ -231,6 +279,9 @@
                                                             <constraint firstAttribute="width" constant="30" id="SEj-Sf-gfd"/>
                                                         </constraints>
                                                         <state key="normal" title="Photo" image="ic_camera"/>
+                                                        <connections>
+                                                            <action selector="onBtnCamera:" destination="bkF-oW-pSl" eventType="touchUpInside" id="41h-0x-20P"/>
+                                                        </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nK2-it-XLv">
                                                         <rect key="frame" x="44" y="0.0" width="30" height="30"/>
@@ -239,6 +290,9 @@
                                                             <constraint firstAttribute="width" constant="30" id="kVa-Vg-T1w"/>
                                                         </constraints>
                                                         <state key="normal" title="Send" image="ic_send"/>
+                                                        <connections>
+                                                            <action selector="onBtnSendNote:" destination="bkF-oW-pSl" eventType="touchUpInside" id="dMf-jH-03E"/>
+                                                        </connections>
                                                     </button>
                                                 </subviews>
                                             </stackView>
@@ -272,7 +326,11 @@
                         <outlet property="imgPhotoUser" destination="Nuo-tn-0Yc" id="4Ne-zl-5qP"/>
                         <outlet property="lblEmailUser" destination="vXq-dA-upn" id="5ML-2Q-4sc"/>
                         <outlet property="lblNameUser" destination="3kQ-x1-eKe" id="Ofv-x0-iTg"/>
+                        <outlet property="tblViewNotes" destination="bsn-ra-Ptr" id="bH3-3b-VKy"/>
                         <outlet property="txtNote" destination="Qb2-vc-L5e" id="3CI-e9-dnr"/>
+                        <outlet property="viewAds" destination="VYt-pb-xXl" id="h5U-zn-vA5"/>
+                        <outlet property="viewOptions" destination="8eQ-uv-3JF" id="0vb-JP-V2Y"/>
+                        <outlet property="viewSendNote" destination="4BD-i2-geF" id="EDR-Yw-neS"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yHa-dV-MrD" userLabel="First Responder" sceneMemberID="firstResponder"/>
