@@ -11,13 +11,71 @@ import Firebase
 import GoogleSignIn
 import FBSDKLoginKit
 
-class HomeViewController: UIViewController {
+class HomeViewController: UIViewController, UITextFieldDelegate {
+	
+	@IBOutlet weak var imgPhotoUser: UIImageView!
+	@IBOutlet weak var lblNameUser: UILabel!
+	@IBOutlet weak var lblEmailUser: UILabel!
+	@IBOutlet weak var txtNote: UITextField!
+	
+	
+	var sbNameUser:String = "";
+	var sbEmailUser:String = "";
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+		self.txtNote.delegate = self;
+		
+		//Se añade evento de tap al view para ocultar el teclado cuando se presione por fuera de txtNote
+		let tapView:UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyborad));
+		self.view.addGestureRecognizer(tapView);
+		//Observadores de eventos de teclado
+		NotificationCenter.default.addObserver(self, selector: #selector(keyborardWillChange(notification:)), name: UIResponder.keyboardWillShowNotification, object: nil);
+		NotificationCenter.default.addObserver(self, selector: #selector(keyborardWillChange(notification:)), name: UIResponder.keyboardWillHideNotification, object: nil);
+		NotificationCenter.default.addObserver(self, selector: #selector(keyborardWillChange(notification:)), name: UIResponder.keyboardWillChangeFrameNotification, object: nil);
     }
+	
+	override func viewWillAppear(_ animated: Bool) {
+		super.viewWillAppear(animated);
+		self.lblNameUser.text = self.sbNameUser;
+		self.lblEmailUser.text = self.sbEmailUser;
+	}
+	
+	deinit {
+		//Se remueven observadores de eventos de teclado
+		NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil);
+		NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil);
+		NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillChangeFrameNotification, object: nil);
+	}
+	
+	@objc func dismissKeyborad(){
+		self.view.endEditing(true);
+	}
+	
+	//Llamar cuando se envíe la nota
+	func hideKeyboard(){
+		self.txtNote.becomeFirstResponder();
+	}
+	
+	@objc func keyborardWillChange(notification: Notification){
+		print("keyborardWillChange >> \(notification.name) ");
+		if UIResponder.keyboardWillShowNotification == notification.name {
+			print("keyboardWillShowNotification  >> \(notification.name) ");
+			if let keyboardFrame:NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
+				print("\(keyboardFrame.cgRectValue.height)");
+				self.view.frame.origin.y = (-1 * keyboardFrame.cgRectValue.height);
+			}
+		}
+		
+		if UIResponder.keyboardWillHideNotification == notification.name {
+			print("keyboardWillHideNotification  >> \(notification.name) ");
+			self.view.frame.origin.y = 0;
+		}
+		
+		if UIResponder.keyboardWillChangeFrameNotification == notification.name {
+			print("keyboardWillChangeFrameNotification  >> \(notification.name) ");
+		}
+	}
     
 	@IBAction func onBtnLogOut(_ sender: Any) {
 		let firebaseAuth = Auth.auth()
@@ -30,15 +88,6 @@ class HomeViewController: UIViewController {
 			print ("Error signing out: %@", signOutError)
 		}
 	}
-	
-    /*
-    // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

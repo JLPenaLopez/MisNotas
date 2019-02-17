@@ -35,7 +35,9 @@ class SignInViewController: UIViewController, GIDSignInUIDelegate, FBSDKLoginBut
 				print("email \(email ?? "")");
 				print("photoURL \(String(describing: photoURL))");
 				print("photoURL \(String(describing: photoURL?.absoluteString))");
-				self.performSegue(withIdentifier: Constants.Segues.SignInToHome, sender: nil);
+				let user:[String:String] = ["nameUser":displayName ?? "","emailUser":email ?? "","photoUser":photoURL?.absoluteString ?? ""];
+				self.performSegue(withIdentifier: Constants.Segues.SignInToHome, sender: user);
+				
 			}
 		}
 		
@@ -88,7 +90,22 @@ class SignInViewController: UIViewController, GIDSignInUIDelegate, FBSDKLoginBut
 	
 	func loginButtonDidLogOut(_ loginButton: FBSDKLoginButton!) {
 		//Usuario cierra sesión con FacebookButton
+		print("Usuario cierra sesión en Facebook con FacebookButton");
 	}
 	
+	
+	// MARK: - Navigation
+	//In a storyboard-based application, you will often want to do a little preparation before navigation
+	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+		// Get the new view controller using segue.destination.
+		// Pass the selected object to the new view controller.
+		if segue.identifier == Constants.Segues.SignInToHome {
+			let vc = segue.destination as? HomeViewController;
+			if let dictUser = sender as? Dictionary<String,String> {
+				vc?.sbNameUser = dictUser["nameUser"] ?? "";
+				vc?.sbEmailUser = dictUser["emailUser"] ?? "";
+			}
+		}
+	}
 }
 
