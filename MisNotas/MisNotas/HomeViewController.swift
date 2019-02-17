@@ -8,6 +8,8 @@
 
 import UIKit
 import Firebase
+import GoogleSignIn
+import FBSDKLoginKit
 
 class HomeViewController: UIViewController {
 
@@ -18,8 +20,10 @@ class HomeViewController: UIViewController {
     }
     
 	@IBAction func onBtnLogOut(_ sender: Any) {
-			let firebaseAuth = Auth.auth()
+		let firebaseAuth = Auth.auth()
 		do {
+			GIDSignIn.sharedInstance()?.signOut();
+			FBSDKLoginManager().logOut();
 			try firebaseAuth.signOut()
 			self.dismiss(animated: true, completion: nil);
 		} catch let signOutError as NSError {

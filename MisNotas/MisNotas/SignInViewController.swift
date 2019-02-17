@@ -38,8 +38,10 @@ class SignInViewController: UIViewController, GIDSignInUIDelegate, FBSDKLoginBut
 				self.performSegue(withIdentifier: Constants.Segues.SignInToHome, sender: nil);
 			}
 		}
+		
 		//Facebook Login
 		btnSingInFacebook.delegate = self;
+		btnSingInFacebook.readPermissions = Constants.permissionsFacebook;
 	}
 	
 	//override func viewDidDisappear(_ animated: Bool) {
@@ -52,9 +54,36 @@ class SignInViewController: UIViewController, GIDSignInUIDelegate, FBSDKLoginBut
 	func loginButton(_ loginButton: FBSDKLoginButton!, didCompleteWith result: FBSDKLoginManagerLoginResult!, error: Error!) {
 		if let error = error {
 			print(error.localizedDescription)
-			return
+			return;
+		}
+		
+		if result.isCancelled{
+			print("Usuario canceló Login")
+			return;
 		}
 		//Usuario inicio sesión con Facebook
+		//Se obtiene la credencial del proveedor de Facebook en Firebase a partir del token del login con Facebook
+		let credential = FacebookAuthProvider.credential(withAccessToken: FBSDKAccessToken.current().tokenString);
+		Auth.auth().signInAndRetrieveData(with: credential) { (authResult, error) in
+			if let error = error {
+				print("Error signInAndRetrieveData FacebookAuthProvider \(error)");
+				return;
+			}
+			// Usuario inició sesión en Facebook y en Firebase
+			print(authResult ?? "");
+		}
+		
+		//Se obtiene la información de perfil del usuario
+		FBSDKGraphRequest(graphPath:"me", parameters: ["fields": "id, email, first_name, last_name, picture"]).start {
+			(connection, result, error) in
+			if error != nil {
+				//Error obteniendo los datos de perfil del usuario
+				print("Error FBSDKGraphRequest \(error!)");
+			} else if let userData = result as? NSDictionary {
+				let email = userData["email"];
+				print("email \(email ?? "")");
+			}
+		}
 	}
 	
 	func loginButtonDidLogOut(_ loginButton: FBSDKLoginButton!) {

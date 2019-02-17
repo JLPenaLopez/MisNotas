@@ -88,5 +88,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
 		//Si el usuario se desconecta de la app...
 		print("User out app");
 	}
+	
+	
 }
 

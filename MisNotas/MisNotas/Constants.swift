@@ -12,4 +12,6 @@ struct Constants {
 	struct Segues {
 		static let SignInToHome = "SignInToHome";
 	}
+	
+	static let permissionsFacebook = ["public_profile", "email", "user_gender"];
 }
