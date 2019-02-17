@@ -9,6 +9,8 @@
 import UIKit
 import Firebase
 import GoogleSignIn
+import FBSDKCoreKit
+
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
@@ -19,9 +21,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
 	func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 		// Override point for customization after application launch.
 		FirebaseApp.configure();
+		//Google Login
 		GIDSignIn.sharedInstance().clientID = FirebaseApp.app()?.options.clientID;
 		GIDSignIn.sharedInstance()?.delegate = self;
 		Auth.auth().useAppLanguage();
+		//Facebook Login
+		FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions);
 		return true
 	}
 
@@ -48,9 +53,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
 	}
 	
 	func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
-		return  GIDSignIn.sharedInstance().handle(url,sourceApplication:options[UIApplication.OpenURLOptionsKey.sourceApplication] as? String,annotation: [:]);
+		
+		let isGoogleURL = GIDSignIn.sharedInstance().handle(url, sourceApplication:options[UIApplication.OpenURLOptionsKey.sourceApplication] as? String,annotation: [:]);
+		
+		if isGoogleURL { return true; }
+		
+		let isFBURL = FBSDKApplicationDelegate.sharedInstance().application(app, open: url, options: options);
+		
+		if isFBURL { return true; }
+		
+		return false;
 	}
-
+	
 	func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
 		//Se administra el acceso a la app
 		if let error = error {

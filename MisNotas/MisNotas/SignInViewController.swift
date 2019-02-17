@@ -9,16 +9,19 @@
 import UIKit
 import Firebase
 import GoogleSignIn
+import FBSDKLoginKit
 
-class SignInViewController: UIViewController, GIDSignInUIDelegate {
+class SignInViewController: UIViewController, GIDSignInUIDelegate, FBSDKLoginButtonDelegate {
 	
 	@IBOutlet weak var btnSignInGoogle: GIDSignInButton!
+	@IBOutlet weak var btnSingInFacebook: FBSDKLoginButton!
 	var handle: AuthStateDidChangeListenerHandle?
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		// Do any additional setup after loading the view, typically from a nib.
 		//Auth.auth().languageCode = "es";
+		//Google Login
 		GIDSignIn.sharedInstance()?.uiDelegate = self;
 		GIDSignIn.sharedInstance()?.signInSilently();
 		self.handle = Auth.auth().addStateDidChangeListener { (auth, user) in
@@ -35,6 +38,8 @@ class SignInViewController: UIViewController, GIDSignInUIDelegate {
 				self.performSegue(withIdentifier: Constants.Segues.SignInToHome, sender: nil);
 			}
 		}
+		//Facebook Login
+		btnSingInFacebook.delegate = self;
 	}
 	
 	//override func viewDidDisappear(_ animated: Bool) {
@@ -44,6 +49,17 @@ class SignInViewController: UIViewController, GIDSignInUIDelegate {
 		}
 	}
 
-
+	func loginButton(_ loginButton: FBSDKLoginButton!, didCompleteWith result: FBSDKLoginManagerLoginResult!, error: Error!) {
+		if let error = error {
+			print(error.localizedDescription)
+			return
+		}
+		//Usuario inicio sesión con Facebook
+	}
+	
+	func loginButtonDidLogOut(_ loginButton: FBSDKLoginButton!) {
+		//Usuario cierra sesión con FacebookButton
+	}
+	
 }
 
