@@ -102,6 +102,7 @@ class SignInViewController: UIViewController, GIDSignInUIDelegate, FBSDKLoginBut
 		if segue.identifier == Constants.Segues.SignInToHome {
 			let vc = segue.destination as? HomeViewController;
 			if let dictUser = sender as? Dictionary<String,String> {
+				vc?.sbPhotoUser = dictUser["photoUser"] ?? "";
 				vc?.sbNameUser = dictUser["nameUser"] ?? "";
 				vc?.sbEmailUser = dictUser["emailUser"] ?? "";
 			}

@@ -7,13 +7,15 @@
 //
 
 import UIKit
+import Photos
 
 import Firebase
 import GoogleSignIn
 import FBSDKLoginKit
 import FirebaseDatabase
+import FirebaseStorage
 
-class HomeViewController: UIViewController, UITextFieldDelegate, UITableViewDelegate, UITableViewDataSource {
+class HomeViewController: UIViewController, UITextFieldDelegate, UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 	
 	@IBOutlet weak var imgPhotoUser: UIImageView!
 	@IBOutlet weak var lblNameUser: UILabel!
@@ -30,11 +32,13 @@ class HomeViewController: UIViewController, UITextFieldDelegate, UITableViewDele
 	var sbEmailUser:String = "";
 	var sbPhotoUser:String = "AppIcon";
 	
-	//Variables de Database Firebase
+	//Variables de Firebase RealTime Database
 	var refDatabase:DatabaseReference!;
 	var notes: [DataSnapshot]! = [];
 	fileprivate var _refDatabaseHandle: DatabaseHandle!;
 	
+	//Variables de Firebase Storage
+	var refStorage: StorageReference!
 	
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,13 +54,29 @@ class HomeViewController: UIViewController, UITextFieldDelegate, UITableViewDele
 		
 		self.tblViewNotes.delegate = self;
 		self.tblViewNotes.dataSource = self;
-		//Configuracion de la base de datos
+		//Configuracion de Firebase RealTime Database
 		self.configureDatabase();
+		//Configuracion de Firebase Storage
+		self.configureStorage();
     }
 	
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated);
-		self.imgPhotoUser.image = UIImage(named: self.sbPhotoUser);
+		
+		
+		if let url = URL(string: self.sbPhotoUser), UIApplication.shared.canOpenURL(url) {
+			do {
+				let data = try Data(contentsOf: url);
+				self.imgPhotoUser.image = UIImage(data: data);
+			} catch let error as NSError {
+				print ("Error obteniendo data de photoURL: \(error.localizedDescription)");
+				self.imgPhotoUser.image = UIImage(named: "AppIcon");
+			}
+			
+		}else{
+			self.imgPhotoUser.image = UIImage(named: "AppIcon");
+		}
+		
 		self.lblNameUser.text = self.sbNameUser;
 		self.lblEmailUser.text = self.sbEmailUser;
 	}
@@ -70,6 +90,10 @@ class HomeViewController: UIViewController, UITextFieldDelegate, UITableViewDele
 			}
 			self.tblViewNotes.reloadData();
 		});
+	}
+	
+	func configureStorage() {
+		self.refStorage = Storage.storage().reference()
 	}
 	
 	deinit {
@@ -124,12 +148,44 @@ class HomeViewController: UIViewController, UITextFieldDelegate, UITableViewDele
 		let cell = self.tblViewNotes.dequeueReusableCell(withIdentifier: "NoteTableViewCell", for: indexPath) as! NoteTableViewCell;
 		
 		let noteSnapshot: DataSnapshot! = self.notes[indexPath.row];
-		guard let message = noteSnapshot.value as? [String:String] else { return cell; }
+		guard let note = noteSnapshot.value as? [String:String] else { return cell; }
 		
-		let name = message[Constants.NoteFields.name] ?? "";
-		let text = message[Constants.NoteFields.text] ?? "";
+		let name = note[Constants.NoteFields.name] ?? "";
+		let text = note[Constants.NoteFields.text] ?? "";
+		let sbText = name + ": " + text;
 		
-		cell.setData(dataImg: nil, textCell: ( name + ": " + text ));
+		if let imageURL = note[Constants.NoteFields.imageURL] {
+			if imageURL.hasPrefix("gs://") {
+				Storage.storage().reference(forURL: imageURL).getData(maxSize: INT64_MAX) { (data, error) in
+					if let error = error {
+						print("Error descargando imageURL \(error.localizedDescription)");
+						cell.setData(dataImg: nil, textCell: sbText);
+					}else{
+						DispatchQueue.main.async {
+							cell.setData(dataImg: data, textCell: sbText);
+						}
+					}
+				}
+			}else if let url = URL(string: imageURL) {
+				do {
+					let data = try Data(contentsOf: url);
+					cell.setData(dataImg: data, textCell: sbText);
+				} catch let error as NSError {
+					print ("Error obteniendo data de imageURL: \(error.localizedDescription)");
+					cell.setData(dataImg: nil, textCell: sbText);
+				}
+			}
+		}else if let photoURL = note[Constants.NoteFields.photoURL], let url = URL(string: photoURL) {
+			do {
+				let data = try Data(contentsOf: url);
+				cell.setData(dataImg: data, textCell: sbText);
+			} catch let error as NSError {
+				print ("Error obteniendo data de photoURL: \(error.localizedDescription)");
+				cell.setData(dataImg: nil, textCell: sbText);
+			}
+		}else{
+			cell.setData(dataImg: nil, textCell: sbText);
+		}
 		
 		return cell;
 	}
@@ -144,6 +200,24 @@ class HomeViewController: UIViewController, UITextFieldDelegate, UITableViewDele
 		self.refDatabase.child(Constants.ChildsDatabase.notes).childByAutoId().setValue(mdata);
 	}
 	
+	func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+		picker.dismiss(animated: true, completion:nil)
+		guard let uid = Auth.auth().currentUser?.uid else { return }
+		guard let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage else { return }
+		let imageData = image.jpegData(compressionQuality: 0.8);
+		let imagePath = "\(uid)/\(Int(Date.timeIntervalSinceReferenceDate * 1000)).jpg"
+		let metadata = StorageMetadata()
+		metadata.contentType = "image/jpeg"
+		self.refStorage.child(imagePath)
+			.putData(imageData!, metadata: metadata) { (metadata, error) in
+				if let error = error {
+					print("Error cargando foto: \(error.localizedDescription)")
+					return
+				}
+				self.sendNote(data: [Constants.NoteFields.imageURL: self.refStorage.child((metadata?.path)!).description])
+		}
+	}
+	
 	@IBAction func onBtnSendNote(_ sender: Any) {
 		if let text = self.txtNote.text, !text.isEmpty{
 			let data = [Constants.NoteFields.text: text]
@@ -154,6 +228,10 @@ class HomeViewController: UIViewController, UITextFieldDelegate, UITableViewDele
 	}
 	
 	@IBAction func onBtnCamera(_ sender: Any) {
+		let picker = UIImagePickerController()
+		picker.delegate = self
+		picker.sourceType = UIImagePickerController.SourceType.camera
+		present(picker, animated: true, completion:nil)
 	}
 	
 	@IBAction func onBtnCrash(_ sender: Any) {

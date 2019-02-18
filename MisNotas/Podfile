@@ -12,5 +12,6 @@ target 'MisNotas' do
   pod 'FBSDKCoreKit'
   pod 'FBSDKLoginKit'
   pod 'Firebase/Database'
+  pod 'Firebase/Storage'
   
 end
