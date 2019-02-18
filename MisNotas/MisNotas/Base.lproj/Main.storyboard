@@ -207,7 +207,7 @@
                                                     </button>
                                                 </subviews>
                                             </stackView>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VYt-pb-xXl">
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VYt-pb-xXl" customClass="GADBannerView">
                                                 <rect key="frame" x="136" y="0.0" width="231" height="50"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
@@ -346,6 +346,7 @@
                         <outlet property="tblViewNotes" destination="bsn-ra-Ptr" id="bH3-3b-VKy"/>
                         <outlet property="txtNote" destination="Qb2-vc-L5e" id="3CI-e9-dnr"/>
                         <outlet property="viewAds" destination="VYt-pb-xXl" id="h5U-zn-vA5"/>
+                        <outlet property="viewHeader" destination="WLx-0s-Bmh" id="tzS-xv-MvO"/>
                         <outlet property="viewOptions" destination="8eQ-uv-3JF" id="0vb-JP-V2Y"/>
                         <outlet property="viewSendNote" destination="4BD-i2-geF" id="EDR-Yw-neS"/>
                     </connections>

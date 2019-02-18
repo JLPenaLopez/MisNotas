@@ -59,6 +59,8 @@
 	</array>
 	<key>NSCameraUsageDescription</key>
 	<string>Tomar fotos y cargarlas en nuestro sistema para mejorar experiencia de usuario</string>
+	<key>NSContactsUsageDescription</key>
+	<string>Obtener contactos para enviar invitación de app</string>
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>

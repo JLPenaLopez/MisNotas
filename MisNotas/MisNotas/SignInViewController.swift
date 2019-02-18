@@ -36,6 +36,7 @@ class SignInViewController: UIViewController, GIDSignInUIDelegate, FBSDKLoginBut
 				print("photoURL \(String(describing: photoURL))");
 				print("photoURL \(String(describing: photoURL?.absoluteString))");
 				let user:[String:String] = ["nameUser":displayName ?? "","emailUser":email ?? "","photoUser":photoURL?.absoluteString ?? ""];
+				MeasurementAnalytics.sendLoginEvent(params: ["email_user":email ?? ""]);
 				self.performSegue(withIdentifier: Constants.Segues.SignInToHome, sender: user);
 				
 			}

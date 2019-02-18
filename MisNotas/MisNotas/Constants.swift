@@ -25,4 +25,23 @@ struct Constants {
 	struct ChildsDatabase {
 		static let notes = "notes";
 	}
+	
+	struct RemoteConfig {
+		struct keys {
+			static let maxLengthNote = "max_length_note";
+			static let colorAppBackground = "color_app_background";
+			static let isHiddenViewOptions = "is_hidden_view_options";
+		}
+		
+		struct defaultValues {
+			static let maxLength:NSNumber = 10;
+			static let colorAppBackgroundDefault:String = "3498DB";
+			static let isHiddenViewOptions:Bool = false;
+		}
+	}
+	
+	struct AdMob {
+		//Se utiliza solo para efectos de pruebas https://developers.google.com/admob/ios/banner?authuser=0
+		static let adUnitID = "ca-app-pub-3940256099942544/2934735716";
+	}
 }
