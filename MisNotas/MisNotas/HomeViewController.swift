@@ -16,6 +16,7 @@ import FirebaseDatabase
 import FirebaseStorage
 import FirebaseRemoteConfig
 import GoogleMobileAds
+import Crashlytics
 
 class HomeViewController: UIViewController, UITextFieldDelegate, UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate, InviteDelegate {
 	
@@ -310,6 +311,21 @@ class HomeViewController: UIViewController, UITextFieldDelegate, UITableViewDele
 	}
 	
 	@IBAction func onBtnCrash(_ sender: Any) {
+		//Se envía la información del usuario con el fallo
+		Crashlytics.sharedInstance().setUserEmail(self.sbEmailUser);
+		Crashlytics.sharedInstance().setUserIdentifier(self.sbEmailUser);
+		Crashlytics.sharedInstance().setUserName(self.sbNameUser);
+		//Se realiza crash generico de prueba
+		//Crashlytics.sharedInstance().crash();
+		//Se realiza registro de excepcion personalizada de prueba (Usado para errores no fatales)
+		var dictParams:Dictionary = Dictionary<String, Any>();
+		dictParams["sbMessageError"] = "Fallo detectado en MisNotas";
+		dictParams["dateError"] = Date();
+		dictParams["idUser"] = 123456;
+		dictParams["sbCotentError"] = "Error cargando foto de URL \(self.sbPhotoUser)";
+		let error:NSError = NSError(domain: "HomeViewController_onBtnCrash", code: 20000, userInfo: dictParams);
+		Crashlytics.sharedInstance().recordError(error);
+		
 	}
 	
 	@IBAction func onBtnRefresh(_ sender: Any) {

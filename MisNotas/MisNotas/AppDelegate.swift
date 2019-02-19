@@ -10,7 +10,8 @@ import UIKit
 import Firebase
 import GoogleSignIn
 import FBSDKCoreKit
-
+import Fabric
+import Crashlytics
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
@@ -21,6 +22,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
 	func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 		// Override point for customization after application launch.
 		FirebaseApp.configure();
+		//Crashlytics
+		Fabric.with([Crashlytics.self]);
+		Fabric.sharedSDK().debug = true;
 		//Google Login
 		GIDSignIn.sharedInstance().clientID = FirebaseApp.app()?.options.clientID;
 		GIDSignIn.sharedInstance()?.delegate = self;

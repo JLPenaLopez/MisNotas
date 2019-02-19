@@ -122,6 +122,7 @@
 				3369120D2210EF02004C00DE /* Resources */,
 				9036A2201AF38840CB5ED166 /* [CP] Embed Pods Frameworks */,
 				263C079B16003735CFE95CE0 /* [CP] Copy Pods Resources */,
+				335DF050221B891700E96C22 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -201,6 +202,24 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MisNotas/Pods-MisNotas-resources.sh\"\n";
 			showEnvVarsInLog = 0;
+		};
+		335DF050221B891700E96C22 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"$(BUILT_PRODUCTS_DIR)/$(INFOPLIST_PATH)",
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Fabric/run\" 8022042a6f6da1191659e186f3a1f1bd1058e95a ceb9571277fce9d21776e0fbb5174d0cf8cf5750c6bdc00189236d56ed5704a2\n";
 		};
 		3BDEFA50812407F5BF22DF2D /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -420,6 +439,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = FY5B7YY47W;
 				INFOPLIST_FILE = MisNotas/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
