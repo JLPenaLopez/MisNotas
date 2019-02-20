@@ -16,6 +16,7 @@ class SignInViewController: UIViewController, GIDSignInUIDelegate, FBSDKLoginBut
 	@IBOutlet weak var btnSignInGoogle: GIDSignInButton!
 	@IBOutlet weak var btnSingInFacebook: FBSDKLoginButton!
 	var handle: AuthStateDidChangeListenerHandle?
+	var sbGenderUser:String?;
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -35,6 +36,7 @@ class SignInViewController: UIViewController, GIDSignInUIDelegate, FBSDKLoginBut
 				print("email \(email ?? "")");
 				print("photoURL \(String(describing: photoURL))");
 				print("photoURL \(String(describing: photoURL?.absoluteString))");
+				print("gender \(self.sbGenderUser ?? "")");
 				let user:[String:String] = ["nameUser":displayName ?? "","emailUser":email ?? "","photoUser":photoURL?.absoluteString ?? ""];
 				MeasurementAnalytics.sendLoginEvent(params: ["email_user":email ?? ""]);
 				self.performSegue(withIdentifier: Constants.Segues.SignInToHome, sender: user);
@@ -64,20 +66,9 @@ class SignInViewController: UIViewController, GIDSignInUIDelegate, FBSDKLoginBut
 			print("Usuario canceló Login")
 			return;
 		}
-		//Usuario inicio sesión con Facebook
-		//Se obtiene la credencial del proveedor de Facebook en Firebase a partir del token del login con Facebook
-		let credential = FacebookAuthProvider.credential(withAccessToken: FBSDKAccessToken.current().tokenString);
-		Auth.auth().signInAndRetrieveData(with: credential) { (authResult, error) in
-			if let error = error {
-				print("Error signInAndRetrieveData FacebookAuthProvider \(error)");
-				return;
-			}
-			// Usuario inició sesión en Facebook y en Firebase
-			print(authResult ?? "");
-		}
 		
 		//Se obtiene la información de perfil del usuario
-		FBSDKGraphRequest(graphPath:"me", parameters: ["fields": "id, email, first_name, last_name, picture"]).start {
+		FBSDKGraphRequest(graphPath:"me", parameters: ["fields": "id, email, first_name, last_name, picture, gender"]).start {
 			(connection, result, error) in
 			if error != nil {
 				//Error obteniendo los datos de perfil del usuario
@@ -85,6 +76,20 @@ class SignInViewController: UIViewController, GIDSignInUIDelegate, FBSDKLoginBut
 			} else if let userData = result as? NSDictionary {
 				let email = userData["email"];
 				print("email \(email ?? "")");
+				self.sbGenderUser = userData["gender"] as? String;
+				//Usuario inicio sesión con Facebook
+				//Se obtiene la credencial del proveedor de Facebook en Firebase a partir del token del login con Facebook
+				let credential = FacebookAuthProvider.credential(withAccessToken: FBSDKAccessToken.current().tokenString);
+				Auth.auth().signInAndRetrieveData(with: credential) { (authResult, error) in
+					if let error = error {
+						print("Error signInAndRetrieveData FacebookAuthProvider \(error)");
+						return;
+					}
+					// Usuario inició sesión en Facebook y en Firebase
+					print(authResult ?? "");
+					print("authResult?.user >> \(String(describing: authResult?.user))");
+					print("authResult?.user.email >> \(String(describing: authResult?.user.email))");
+				}
 			}
 		}
 	}

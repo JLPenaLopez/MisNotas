@@ -19,8 +19,23 @@
 		336912182210EF02004C00DE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 336912162210EF02004C00DE /* Main.storyboard */; };
 		3369121A2210EF03004C00DE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 336912192210EF03004C00DE /* Assets.xcassets */; };
 		3369121D2210EF03004C00DE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3369121B2210EF03004C00DE /* LaunchScreen.storyboard */; };
+		33705863221CCD2800B0215D /* MisNotasTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33705862221CCD2800B0215D /* MisNotasTests.swift */; };
+		33705870221CDD1F00B0215D /* Car.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3370586F221CDD1F00B0215D /* Car.swift */; };
+		33705872221CDEB900B0215D /* CarTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33705871221CDEB900B0215D /* CarTests.swift */; };
+		33705873221CE07200B0215D /* Car.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3370586F221CDD1F00B0215D /* Car.swift */; };
+		33705875221CE8BD00B0215D /* CartTestTwo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33705874221CE8BD00B0215D /* CartTestTwo.swift */; };
 		A5433BF25D49B1B348F21028 /* Pods_MisNotas.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC5713EBF51EFAFDFCA309D6 /* Pods_MisNotas.framework */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		33705865221CCD2800B0215D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 336912072210EF02004C00DE /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 3369120E2210EF02004C00DE;
+			remoteInfo = MisNotas;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		3338C8B62210F85A00AE9DCA /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -37,6 +52,12 @@
 		336912192210EF03004C00DE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3369121C2210EF03004C00DE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3369121E2210EF03004C00DE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		33705860221CCD2800B0215D /* MisNotasTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MisNotasTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		33705862221CCD2800B0215D /* MisNotasTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MisNotasTests.swift; sourceTree = "<group>"; };
+		33705864221CCD2800B0215D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3370586F221CDD1F00B0215D /* Car.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Car.swift; sourceTree = "<group>"; };
+		33705871221CDEB900B0215D /* CarTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarTests.swift; sourceTree = "<group>"; };
+		33705874221CE8BD00B0215D /* CartTestTwo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartTestTwo.swift; sourceTree = "<group>"; };
 		97752D1F21E9D907560E13FC /* Pods-MisNotas.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MisNotas.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MisNotas/Pods-MisNotas.debug.xcconfig"; sourceTree = "<group>"; };
 		DC5713EBF51EFAFDFCA309D6 /* Pods_MisNotas.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MisNotas.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FE78DEEC7B5758CE951AB63C /* Pods-MisNotas.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MisNotas.release.xcconfig"; path = "Pods/Target Support Files/Pods-MisNotas/Pods-MisNotas.release.xcconfig"; sourceTree = "<group>"; };
@@ -48,6 +69,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				A5433BF25D49B1B348F21028 /* Pods_MisNotas.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3370585D221CCD2800B0215D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -67,6 +95,7 @@
 			isa = PBXGroup;
 			children = (
 				336912112210EF02004C00DE /* MisNotas */,
+				33705861221CCD2800B0215D /* MisNotasTests */,
 				336912102210EF02004C00DE /* Products */,
 				198388FBB387E9C623287AB2 /* Pods */,
 				4F7165DA9570A67697CFD496 /* Frameworks */,
@@ -78,6 +107,7 @@
 			isa = PBXGroup;
 			children = (
 				3369120F2210EF02004C00DE /* MisNotas.app */,
+				33705860221CCD2800B0215D /* MisNotasTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -85,20 +115,72 @@
 		336912112210EF02004C00DE /* MisNotas */ = {
 			isa = PBXGroup;
 			children = (
+				3370586E221CCEAD00B0215D /* cells */,
+				3370586D221CCE4600B0215D /* extensions */,
+				3370586C221CCE3F00B0215D /* helpers */,
+				3370586B221CCE3300B0215D /* controllers */,
+				3370586A221CCDCB00B0215D /* models */,
 				336912122210EF02004C00DE /* AppDelegate.swift */,
-				336912142210EF02004C00DE /* SignInViewController.swift */,
 				336912162210EF02004C00DE /* Main.storyboard */,
 				336912192210EF03004C00DE /* Assets.xcassets */,
 				3369121B2210EF03004C00DE /* LaunchScreen.storyboard */,
 				3369121E2210EF03004C00DE /* Info.plist */,
-				3349A4692211088800ADE3E6 /* Constants.swift */,
-				335ABD6D22110C080088D333 /* HomeViewController.swift */,
-				334656912219F5B600FE569F /* NoteTableViewCell.swift */,
-				33465693221A216900FE569F /* UIView.swift */,
-				33465695221A3F8900FE569F /* UIColor.swift */,
-				33465697221A46A200FE569F /* MeasurementAnalytics.swift */,
 			);
 			path = MisNotas;
+			sourceTree = "<group>";
+		};
+		33705861221CCD2800B0215D /* MisNotasTests */ = {
+			isa = PBXGroup;
+			children = (
+				33705862221CCD2800B0215D /* MisNotasTests.swift */,
+				33705864221CCD2800B0215D /* Info.plist */,
+				33705871221CDEB900B0215D /* CarTests.swift */,
+				33705874221CE8BD00B0215D /* CartTestTwo.swift */,
+			);
+			path = MisNotasTests;
+			sourceTree = "<group>";
+		};
+		3370586A221CCDCB00B0215D /* models */ = {
+			isa = PBXGroup;
+			children = (
+				3370586F221CDD1F00B0215D /* Car.swift */,
+			);
+			path = models;
+			sourceTree = "<group>";
+		};
+		3370586B221CCE3300B0215D /* controllers */ = {
+			isa = PBXGroup;
+			children = (
+				336912142210EF02004C00DE /* SignInViewController.swift */,
+				335ABD6D22110C080088D333 /* HomeViewController.swift */,
+			);
+			path = controllers;
+			sourceTree = "<group>";
+		};
+		3370586C221CCE3F00B0215D /* helpers */ = {
+			isa = PBXGroup;
+			children = (
+				33465697221A46A200FE569F /* MeasurementAnalytics.swift */,
+				3349A4692211088800ADE3E6 /* Constants.swift */,
+			);
+			path = helpers;
+			sourceTree = "<group>";
+		};
+		3370586D221CCE4600B0215D /* extensions */ = {
+			isa = PBXGroup;
+			children = (
+				33465693221A216900FE569F /* UIView.swift */,
+				33465695221A3F8900FE569F /* UIColor.swift */,
+			);
+			path = extensions;
+			sourceTree = "<group>";
+		};
+		3370586E221CCEAD00B0215D /* cells */ = {
+			isa = PBXGroup;
+			children = (
+				334656912219F5B600FE569F /* NoteTableViewCell.swift */,
+			);
+			path = cells;
 			sourceTree = "<group>";
 		};
 		4F7165DA9570A67697CFD496 /* Frameworks */ = {
@@ -133,6 +215,24 @@
 			productReference = 3369120F2210EF02004C00DE /* MisNotas.app */;
 			productType = "com.apple.product-type.application";
 		};
+		3370585F221CCD2800B0215D /* MisNotasTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 33705869221CCD2800B0215D /* Build configuration list for PBXNativeTarget "MisNotasTests" */;
+			buildPhases = (
+				3370585C221CCD2800B0215D /* Sources */,
+				3370585D221CCD2800B0215D /* Frameworks */,
+				3370585E221CCD2800B0215D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				33705866221CCD2800B0215D /* PBXTargetDependency */,
+			);
+			name = MisNotasTests;
+			productName = MisNotasTests;
+			productReference = 33705860221CCD2800B0215D /* MisNotasTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -145,6 +245,10 @@
 				TargetAttributes = {
 					3369120E2210EF02004C00DE = {
 						CreatedOnToolsVersion = 10.1;
+					};
+					3370585F221CCD2800B0215D = {
+						CreatedOnToolsVersion = 10.1;
+						TestTargetID = 3369120E2210EF02004C00DE;
 					};
 				};
 			};
@@ -162,6 +266,7 @@
 			projectRoot = "";
 			targets = (
 				3369120E2210EF02004C00DE /* MisNotas */,
+				3370585F221CCD2800B0215D /* MisNotasTests */,
 			);
 		};
 /* End PBXProject section */
@@ -175,6 +280,13 @@
 				3338C8B72210F85A00AE9DCA /* GoogleService-Info.plist in Resources */,
 				3369121A2210EF03004C00DE /* Assets.xcassets in Resources */,
 				336912182210EF02004C00DE /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3370585E221CCD2800B0215D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -289,13 +401,33 @@
 				336912132210EF02004C00DE /* AppDelegate.swift in Sources */,
 				33465698221A46A200FE569F /* MeasurementAnalytics.swift in Sources */,
 				3349A46A2211088800ADE3E6 /* Constants.swift in Sources */,
+				33705870221CDD1F00B0215D /* Car.swift in Sources */,
 				334656922219F5B600FE569F /* NoteTableViewCell.swift in Sources */,
 				33465694221A216900FE569F /* UIView.swift in Sources */,
 				335ABD6E22110C080088D333 /* HomeViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		3370585C221CCD2800B0215D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				33705875221CE8BD00B0215D /* CartTestTwo.swift in Sources */,
+				33705872221CDEB900B0215D /* CarTests.swift in Sources */,
+				33705863221CCD2800B0215D /* MisNotasTests.swift in Sources */,
+				33705873221CE07200B0215D /* Car.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		33705866221CCD2800B0215D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 3369120E2210EF02004C00DE /* MisNotas */;
+			targetProxy = 33705865221CCD2800B0215D /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		336912162210EF02004C00DE /* Main.storyboard */ = {
@@ -474,6 +606,46 @@
 			};
 			name = Release;
 		};
+		33705867221CCD2800B0215D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = FY5B7YY47W;
+				INFOPLIST_FILE = MisNotasTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.jlpenalopez.MisNotasTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MisNotas.app/MisNotas";
+			};
+			name = Debug;
+		};
+		33705868221CCD2800B0215D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = FY5B7YY47W;
+				INFOPLIST_FILE = MisNotasTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.jlpenalopez.MisNotasTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MisNotas.app/MisNotas";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -491,6 +663,15 @@
 			buildConfigurations = (
 				336912222210EF03004C00DE /* Debug */,
 				336912232210EF03004C00DE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		33705869221CCD2800B0215D /* Build configuration list for PBXNativeTarget "MisNotasTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				33705867221CCD2800B0215D /* Debug */,
+				33705868221CCD2800B0215D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
