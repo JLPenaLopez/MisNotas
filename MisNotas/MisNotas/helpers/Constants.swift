@@ -31,12 +31,14 @@ struct Constants {
 			static let maxLengthNote = "max_length_note";
 			static let colorAppBackground = "color_app_background";
 			static let isHiddenViewOptions = "is_hidden_view_options";
+			static let isCrashApp = "is_crash_app";
 		}
 		
 		struct defaultValues {
 			static let maxLength:NSNumber = 10;
 			static let colorAppBackgroundDefault:String = "3498DB";
 			static let isHiddenViewOptions:Bool = false;
+			static let isCrashApp = false;
 		}
 	}
 	

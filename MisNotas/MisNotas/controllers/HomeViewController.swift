@@ -48,6 +48,7 @@ class HomeViewController: UIViewController, UITextFieldDelegate, UITableViewDele
 	var maxLength:NSNumber = Constants.RemoteConfig.defaultValues.maxLength;
 	var colorAppBackground:String = Constants.RemoteConfig.defaultValues.colorAppBackgroundDefault;
 	var isHiddenViewOptions:Bool = Constants.RemoteConfig.defaultValues.isHiddenViewOptions;
+	var isCrashApp:Bool =  Constants.RemoteConfig.defaultValues.isCrashApp;
 	
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -131,9 +132,11 @@ class HomeViewController: UIViewController, UITextFieldDelegate, UITableViewDele
 				let maxLenghtNote = self.remoteConfig[Constants.RemoteConfig.keys.maxLengthNote];
 				let colorAppBackground = self.remoteConfig[Constants.RemoteConfig.keys.colorAppBackground];
 				let isHiddenViewOptions = self.remoteConfig[Constants.RemoteConfig.keys.isHiddenViewOptions];
+				let isCrashApp = self.remoteConfig[Constants.RemoteConfig.keys.isCrashApp];
 				self.maxLength = maxLenghtNote.numberValue!;
 				self.colorAppBackground = colorAppBackground.stringValue!;
 				self.isHiddenViewOptions = isHiddenViewOptions.boolValue;
+				self.isCrashApp = isCrashApp.boolValue;
 				self.configureView();
 			} else {
 				if let error = error {
@@ -315,17 +318,20 @@ class HomeViewController: UIViewController, UITextFieldDelegate, UITableViewDele
 		Crashlytics.sharedInstance().setUserEmail(self.sbEmailUser);
 		Crashlytics.sharedInstance().setUserIdentifier(self.sbEmailUser);
 		Crashlytics.sharedInstance().setUserName(self.sbNameUser);
-		//Se realiza crash generico de prueba
-		//Crashlytics.sharedInstance().crash();
-		//Se realiza registro de excepcion personalizada de prueba (Usado para errores no fatales)
-		var dictParams:Dictionary = Dictionary<String, Any>();
-		dictParams["sbMessageError"] = "Fallo detectado en MisNotas";
-		dictParams["dateError"] = Date();
-		dictParams["idUser"] = 123456;
-		dictParams["sbCotentError"] = "Error cargando foto de URL \(self.sbPhotoUser)";
-		let error:NSError = NSError(domain: "HomeViewController_onBtnCrash", code: 20000, userInfo: dictParams);
-		Crashlytics.sharedInstance().recordError(error);
 		
+		if self.isCrashApp {
+			//Se realiza crash generico de prueba
+			Crashlytics.sharedInstance().crash();
+		}else{
+			//Se realiza registro de excepcion personalizada de prueba (Usado para errores no fatales)
+			var dictParams:Dictionary = Dictionary<String, Any>();
+			dictParams["sbMessageError"] = "Fallo detectado en MisNotas";
+			dictParams["dateError"] = Date();
+			dictParams["idUser"] = 123456;
+			dictParams["sbCotentError"] = "Error cargando foto de URL \(self.sbPhotoUser)";
+			let error:NSError = NSError(domain: "HomeViewController_onBtnCrash", code: 20000, userInfo: dictParams);
+			Crashlytics.sharedInstance().recordError(error);
+		}		
 	}
 	
 	@IBAction func onBtnRefresh(_ sender: Any) {
