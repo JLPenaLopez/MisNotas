@@ -24,6 +24,7 @@
 		33705872221CDEB900B0215D /* CarTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33705871221CDEB900B0215D /* CarTests.swift */; };
 		33705873221CE07200B0215D /* Car.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3370586F221CDD1F00B0215D /* Car.swift */; };
 		33705875221CE8BD00B0215D /* CartTestTwo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33705874221CE8BD00B0215D /* CartTestTwo.swift */; };
+		33F45E2F22AA1AB7009135E5 /* PreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33F45E2E22AA1AB7009135E5 /* PreViewController.swift */; };
 		A5433BF25D49B1B348F21028 /* Pods_MisNotas.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC5713EBF51EFAFDFCA309D6 /* Pods_MisNotas.framework */; };
 /* End PBXBuildFile section */
 
@@ -58,6 +59,7 @@
 		3370586F221CDD1F00B0215D /* Car.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Car.swift; sourceTree = "<group>"; };
 		33705871221CDEB900B0215D /* CarTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarTests.swift; sourceTree = "<group>"; };
 		33705874221CE8BD00B0215D /* CartTestTwo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartTestTwo.swift; sourceTree = "<group>"; };
+		33F45E2E22AA1AB7009135E5 /* PreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreViewController.swift; sourceTree = "<group>"; };
 		97752D1F21E9D907560E13FC /* Pods-MisNotas.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MisNotas.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MisNotas/Pods-MisNotas.debug.xcconfig"; sourceTree = "<group>"; };
 		DC5713EBF51EFAFDFCA309D6 /* Pods_MisNotas.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MisNotas.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FE78DEEC7B5758CE951AB63C /* Pods-MisNotas.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MisNotas.release.xcconfig"; path = "Pods/Target Support Files/Pods-MisNotas/Pods-MisNotas.release.xcconfig"; sourceTree = "<group>"; };
@@ -153,6 +155,7 @@
 			children = (
 				336912142210EF02004C00DE /* SignInViewController.swift */,
 				335ABD6D22110C080088D333 /* HomeViewController.swift */,
+				33F45E2E22AA1AB7009135E5 /* PreViewController.swift */,
 			);
 			path = controllers;
 			sourceTree = "<group>";
@@ -404,6 +407,7 @@
 				33705870221CDD1F00B0215D /* Car.swift in Sources */,
 				334656922219F5B600FE569F /* NoteTableViewCell.swift in Sources */,
 				33465694221A216900FE569F /* UIView.swift in Sources */,
+				33F45E2F22AA1AB7009135E5 /* PreViewController.swift in Sources */,
 				335ABD6E22110C080088D333 /* HomeViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

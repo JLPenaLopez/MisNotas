@@ -21,6 +21,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
 
 	func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 		// Override point for customization after application launch.
+		
+		window = UIWindow(frame: UIScreen.main.bounds)
+		let storyboard = UIStoryboard(name: "Main", bundle: nil)
+		let initialViewController = storyboard.instantiateViewController(withIdentifier: "PreViewController");
+		if let window = window {
+			let nav = UINavigationController();
+			nav.setViewControllers([initialViewController], animated: false);
+			self.window?.rootViewController = nav;
+			window.makeKeyAndVisible()
+		}
+		
 		FirebaseApp.configure();
 		//Crashlytics
 		Fabric.with([Crashlytics.self]);

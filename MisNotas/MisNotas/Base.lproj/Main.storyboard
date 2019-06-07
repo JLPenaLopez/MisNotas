@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -13,7 +13,7 @@
         <!--Sign In View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="SignInViewController" customModule="MisNotas" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SignInViewController" id="BYZ-38-t0r" customClass="SignInViewController" customModule="MisNotas" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -90,10 +90,35 @@
             </objects>
             <point key="canvasLocation" x="88.799999999999997" y="116.49175412293854"/>
         </scene>
+        <!--Pre View Controller-->
+        <scene sceneID="Hl0-r5-hPx">
+            <objects>
+                <viewController storyboardIdentifier="PreViewController" id="sbx-4F-3NJ" customClass="PreViewController" customModule="MisNotas" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="vrO-st-KeU">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lnj-dF-Wnu">
+                                <rect key="frame" x="165" y="318" width="45" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Seguir"/>
+                                <connections>
+                                    <action selector="onBtnNext:" destination="sbx-4F-3NJ" eventType="touchUpInside" id="vsV-Vh-a50"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="DXC-05-rLg"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="eTK-Gf-UpL" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-759" y="116"/>
+        </scene>
         <!--Home View Controller-->
         <scene sceneID="pmB-cG-yEh">
             <objects>
-                <viewController id="bkF-oW-pSl" customClass="HomeViewController" customModule="MisNotas" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="HomeViewController" id="bkF-oW-pSl" customClass="HomeViewController" customModule="MisNotas" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="y3i-In-qbD">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -358,11 +383,11 @@
     </scenes>
     <resources>
         <image name="GdgCali" width="1462" height="300"/>
-        <image name="ic_bug" width="180" height="180"/>
-        <image name="ic_camera" width="180" height="180"/>
-        <image name="ic_logout" width="180" height="180"/>
-        <image name="ic_refresh" width="180" height="180"/>
-        <image name="ic_send" width="180" height="180"/>
-        <image name="ic_share" width="180" height="180"/>
+        <image name="ic_bug" width="50" height="50"/>
+        <image name="ic_camera" width="50" height="50"/>
+        <image name="ic_logout" width="50" height="50"/>
+        <image name="ic_refresh" width="50" height="50"/>
+        <image name="ic_send" width="50" height="50"/>
+        <image name="ic_share" width="50" height="50"/>
     </resources>
 </document>
